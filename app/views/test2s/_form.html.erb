@@ -1,0 +1,32 @@
+<%= form_with(model: test2, local: true) do |form| %>
+  <% if test2.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(test2.errors.count, "error") %> prohibited this test2 from being saved:</h2>
+
+      <ul>
+        <% test2.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :t1 %>
+    <%= form.text_field :t1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :t2 %>
+    <%= form.text_field :t2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :encrypted_t2_string %>
+    <%= form.text_field :encrypted_t2_string, :value => SymmetricEncryption.decrypt(@test2.encrypted_t2_string) %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
